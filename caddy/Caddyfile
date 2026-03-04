@@ -2,6 +2,8 @@
     email {$ADMIN_EMAIL:admin@example.com}
 }
 
+# Main domain block - only used when DOMAIN is a real hostname (not IP)
+# For IP addresses, use the :80 block below
 {$DOMAIN:localhost} {
     reverse_proxy ghost:2368
 
@@ -21,7 +23,7 @@
     }
 }
 
-# Handle nip.io domains for staging
+# Handle nip.io domains for staging (with self-signed cert)
 *.nip.io {
     reverse_proxy ghost:2368
 
@@ -36,7 +38,12 @@
     tls internal
 }
 
-# HTTP fallback for direct IP access
+# HTTP access for direct IP (no SSL)
 :80 {
     reverse_proxy ghost:2368
+
+    header {
+        X-Content-Type-Options "nosniff"
+        -Server
+    }
 }
