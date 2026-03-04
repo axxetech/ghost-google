@@ -1,0 +1,18 @@
+# Example terraform.tfvars
+# Copy to terraform.tfvars and customize
+
+# Required: Client identifier
+client_name = "testclient"
+
+# Optional: Custom domain (can be added later)
+# client_domain = "blog.example.com"
+
+# Optional: Override defaults
+# region = "europe-west1"
+# zone = "europe-west1-b"
+# machine_type = "e2-small"
+# data_disk_size_gb = 50
+
+# Repository URL (change if using a different repo)
+# repo_url = "https://github.com/axxetech/ghost-google.git"
+# repo_branch = "main"

@@ -1,0 +1,42 @@
+{
+    email {$ADMIN_EMAIL:admin@example.com}
+}
+
+{$DOMAIN:localhost} {
+    reverse_proxy ghost:2368
+
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    encode gzip
+
+    log {
+        output stdout
+        format json
+    }
+}
+
+# Handle nip.io domains for staging
+*.nip.io {
+    reverse_proxy ghost:2368
+
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        -Server
+    }
+
+    encode gzip
+
+    tls internal
+}
+
+# HTTP fallback for direct IP access
+:80 {
+    reverse_proxy ghost:2368
+}
