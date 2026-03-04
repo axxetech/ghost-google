@@ -31,8 +31,13 @@ cat > "$OUTPUT_FILE" << EOF
 # Ghost Configuration for: $CLIENT_NAME
 # Generated: $(date)
 
-# Domain (update after getting static IP or when custom domain is ready)
-DOMAIN=$DOMAIN
+# Ghost URL (update after getting static IP)
+# For IP access: http://STATIC_IP
+# For custom domain: https://$DOMAIN
+GHOST_URL=http://localhost
+
+# Caddy domain (set to 'localhost' for IP access, or real domain for HTTPS)
+DOMAIN=localhost
 
 # MySQL Configuration
 MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASS
@@ -42,7 +47,7 @@ MYSQL_PASSWORD=$MYSQL_GHOST_PASS
 
 # Email Configuration (optional - uncomment and configure if needed)
 # GHOST_MAIL_TRANSPORT=SMTP
-# GHOST_MAIL_FROM=noreply@$DOMAIN
+# GHOST_MAIL_FROM=noreply@yourdomain.com
 # GHOST_MAIL_SERVICE=Mailgun
 # GHOST_MAIL_USER=
 # GHOST_MAIL_PASS=
